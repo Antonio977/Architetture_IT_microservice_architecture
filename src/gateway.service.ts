@@ -2,7 +2,7 @@ import { Service, ServiceBroker } from "moleculer";
 import ApiGateway from "moleculer-web";
 
 export default class GatewayService extends Service {
-    public constructor(public broker: ServiceBroker) {
+    public constructor(broker: ServiceBroker) {
         super(broker);
 
         this.parseServiceSchema({
@@ -17,7 +17,7 @@ export default class GatewayService extends Service {
                         path: "/api",
                         aliases: {
                             "GET games": "catalog.listActive",
-                            "GET wallet/:userId": "wallet.get",
+                            "GET wallet/:userId": "wallet.getBalance",
                             "POST play": "accounting.play"
                         },
                         bodyParsers: {

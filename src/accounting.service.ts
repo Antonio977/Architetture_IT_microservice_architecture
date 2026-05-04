@@ -4,7 +4,8 @@ import SequelizeAdapter from "moleculer-db-adapter-sequelize";
 import Sequelize from "sequelize";
 
 export default class AccountingService extends Service {
-    public constructor(public broker: ServiceBroker) {
+    // ⬇️ ERRORE CORRETTO QUI: rimosso "public" da dentro le parentesi
+    public constructor(broker: ServiceBroker) {
         super(broker);
         
         this.parseServiceSchema({
@@ -21,6 +22,9 @@ export default class AccountingService extends Service {
                     game_id: Sequelize.INTEGER,
                     amount: Sequelize.DECIMAL(10, 2),
                     status: Sequelize.STRING
+                },
+                options: {
+                    timestamps: false // ⬅️ Aggiungi questa riga
                 }
             },
             actions: {

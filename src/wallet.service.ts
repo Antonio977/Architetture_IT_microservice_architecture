@@ -4,7 +4,7 @@ import SequelizeAdapter from "moleculer-db-adapter-sequelize";
 import Sequelize from "sequelize";
 
 export default class WalletService extends Service {
-    public constructor(public broker: ServiceBroker) {
+    public constructor( broker: ServiceBroker) {
         super(broker);
         
         this.parseServiceSchema({
@@ -17,11 +17,14 @@ export default class WalletService extends Service {
                 name: "wallets",
                 define: {
                     user_id: { type: Sequelize.INTEGER, primaryKey: true },
-                    balance: { type: Sequelize.DECIMAL(10, 2), defaultValue: 0 }
+                    balance: { type: Sequelize.DECIMAL(47, 2), defaultValue: 0 }
+                },
+                options: {
+                    timestamps: false // ⬅️ Aggiungi questa riga
                 }
             },
             actions: {
-                get: {
+                getBalance: {
                     params: { userId: { type: "string", convert: true } },
                     async handler(ctx: Context<{ userId: string }>): Promise<any> {
                         const wallet = await this.adapter.findById(ctx.params.userId);

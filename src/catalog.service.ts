@@ -4,7 +4,7 @@ import SequelizeAdapter from "moleculer-db-adapter-sequelize";
 import Sequelize from "sequelize";
 
 export default class CatalogService extends Service {
-    public constructor(public broker: ServiceBroker) {
+    public constructor(broker: ServiceBroker) {
         super(broker);
         
         this.parseServiceSchema({
@@ -20,6 +20,9 @@ export default class CatalogService extends Service {
                     name: Sequelize.STRING,
                     status: Sequelize.STRING,
                     category: Sequelize.STRING
+                },
+                options: {
+                    timestamps: false // ⬅️ Aggiungi questa riga
                 }
             },
             actions: {
