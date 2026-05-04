@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Gaming Portal</title>
+    <!-- Beer CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/beercss@3.7.0/dist/cdn/beer.min.css" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.7.0/dist/cdn/beer.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.0/dist/cdn/material-dynamic-colors.min.js"></script>
+</head>
+<body class="light">
+    <!-- Navbar -->
+    <header class="top fixed primary">
+        <nav>
+            <h5 class="max">Catalog Games</h5>
+            <div class="row">
+                <i>account_balance_wallet</i>
+                <span>Saldo: <b id="user-balance">--</b> €</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="responsive">
+        <div class="space"></div>
+        <h4>Lista Giochi Attivi</h4>
+        <div class="grid" id="games-container">
+            <!-- Node injection: renderizzazione asincrona DOM delle card -->
+        </div>
+    </main>
+
+    <!-- Dialog Modale (Beer CSS UI) -->
+    <dialog id="result-dialog">
+        <h5 id="dialog-title">Esito</h5>
+        <div id="dialog-message" class="padding-bottom"></div>
+        <nav class="right-align">
+            <button class="transparent link" data-ui="#result-dialog">Chiudi</button>
+        </nav>
+    </dialog>
+
+    <script src="/app.js"></script>
+</body>
+</html>
