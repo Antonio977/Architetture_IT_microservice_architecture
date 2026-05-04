@@ -10,15 +10,13 @@ export default class CatalogService extends Service {
         this.parseServiceSchema({
             name: "catalog",
             mixins: [DbService],
-            adapter: new SequelizeAdapter(process.env.MYSQL_URI || "mysql://root:password@localhost:3306/moleculer_db"),
+            adapter: new SequelizeAdapter(process.env.MYSQL_URI || "mysql://root:password@localhost:3306/moleculer_db", {
+                sync: { force: false } 
+            }),
             model: {
                 name: "games",
                 define: {
-                    id: {
-                        type: Sequelize.INTEGER,
-                        primaryKey: true,
-                        autoIncrement: true
-                    },
+                    id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
                     name: Sequelize.STRING,
                     status: Sequelize.STRING,
                     category: Sequelize.STRING
@@ -31,22 +29,22 @@ export default class CatalogService extends Service {
                     }
                 },
                 checkStatus: {
-                    params: {
-                        gameId: "number"
-                    },
+                    params: { gameId: "number" },
                     async handler(ctx: Context<{ gameId: number }>): Promise<any> {
                         const game = await this.adapter.findById(ctx.params.gameId);
-                        
-                        if (!game) {
-                            throw new Errors.MoleculerError("Game not found", 404, "GAME_NOT_FOUND");
-                        }
-                        
-                        if (game.status !== 'attivo') {
-                            throw new Errors.MoleculerError("Game is not active", 400, "GAME_NOT_ACTIVE");
-                        }
-                        
+                        if (!game) throw new Errors.MoleculerError("Game not found", 404, "GAME_NOT_FOUND");
+                        if (game.status !== 'attivo') throw new Errors.MoleculerError("Game is not active", 400, "GAME_NOT_ACTIVE");
                         return game;
                     }
+                }
+            },
+            async afterConnected() {
+                const count = await this.adapter.count();
+                if (count === 0) {
+                    await this.adapter.insertMany([
+                        { name: "Cyberpunk 2077", status: "attivo", category: "RPG" },
+                        { name: "Tetris", status: "attivo", category: "Puzzle" }
+                    ]);
                 }
             }
         });

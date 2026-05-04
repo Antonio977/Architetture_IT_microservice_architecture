@@ -4,8 +4,8 @@
   "description": "Microservices project with MoleculerJS, Sequelize, and MySQL",
   "main": "index.js",
   "scripts": {
-    "dev": "moleculer-runner --repl --config molecular.config.ts src/*.service.ts",
-    "start": "moleculer-runner --config molecular.config.ts src/*.service.ts"
+    "dev": "moleculer-runner --repl --config moleculer.config.ts src/*.service.ts",
+    "start": "moleculer-runner --config moleculer.config.ts src/*.service.ts"
   },
   "dependencies": {
     "moleculer": "^0.14.33",
