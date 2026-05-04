@@ -12,16 +12,14 @@ export default class GatewayService extends Service {
             settings: {
                 port: process.env.PORT || 3000,
 
-                // Configurazione delle rotte API
                 routes: [
                     {
                         path: "/api",
                         aliases: {
                             "GET games": "catalog.listActive",
-                            "GET wallet/:userId": "wallet.checkBalance",
+                            "GET wallet/:userId": "wallet.get",
                             "POST play": "accounting.play"
                         },
-                        // Permette di leggere il body della richiesta (JSON)
                         bodyParsers: {
                             json: true,
                             urlencoded: { extended: true }
@@ -29,7 +27,6 @@ export default class GatewayService extends Service {
                     }
                 ],
 
-                // Serve i file statici dalla cartella 'public' (index.html, app.js)
                 assets: {
                     folder: "public"
                 }

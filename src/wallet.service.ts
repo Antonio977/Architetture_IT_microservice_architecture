@@ -25,6 +25,20 @@ export default class WalletService extends Service {
                 }
             },
             actions: {
+                get: {
+                    params: {
+                        userId: { type: "string", convert: true }
+                    },
+                    async handler(ctx: Context<{ userId: string }>): Promise<any> {
+                        const wallet = await this.adapter.findById(ctx.params.userId);
+                        
+                        if (!wallet) {
+                            throw new Errors.MoleculerError("Wallet not found", 404, "WALLET_NOT_FOUND");
+                        }
+                        
+                        return { balance: wallet.balance };
+                    }
+                },
                 checkBalance: {
                     params: {
                         userId: "number",
