@@ -1,0 +1,22 @@
+# Dipendenze
+node_modules/
+
+# Output di compilazione TypeScript
+dist/
+lib/
+
+# Log
+logs
+*.log
+npm-debug.log*
+
+# Variabili di ambiente (contengono credenziali DB)
+.env
+
+# File di sistema e IDE
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+repomix-Output.xml
+repomix-output.xml
