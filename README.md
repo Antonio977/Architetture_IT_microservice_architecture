@@ -52,3 +52,6 @@ L'ecosistema è composto dai seguenti microservizi:
 1. Accedi al tuo server database e crea il database per il progetto:
    ```sql
    CREATE DATABASE IF NOT EXISTS moleculer_db;
+### Grafico del progetto
+
+<img width="2676" height="1776" alt="V1 0_Grafico del progetto" src="https://github.com/user-attachments/assets/59036814-c65e-435c-8129-f2f7e2a93e93" />
